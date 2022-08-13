@@ -1,6 +1,5 @@
 const db = require('./database');
 const Sequelize = require('sequelize');
-const { Op } = require('sequelize');
 
 // Make sure you have `postgres` running!
 
@@ -73,9 +72,7 @@ Owner.prototype.getIncompleteTasks = async function () {
     include: {
       model: Task,
       where: { 
-        complete: {
-          [Op.eq]: false
-        } 
+        complete: false
       }
     }
   });
@@ -86,7 +83,6 @@ Owner.beforeDestroy(instance => {
   if(instance.name === 'Grace Hopper'){
     throw new Error('Grace Hopper cant be destroyed');
   }
-
 });
 
 
