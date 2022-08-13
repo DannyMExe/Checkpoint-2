@@ -1,8 +1,15 @@
 const express = require('express');
 const app = express();
+const morgan = require("morgan");
+//const path = require("path");
 module.exports = app; // this line is only used to make testing easier.
 
 // remember to plug in your router and any other middleware you may need here (i.e. body parser, mounting any router-level middleware, etc.)
+//app.use(morgan("dev")); //logging middleware
+app.use(express.urlencoded({ extended: false })); //parsing middleware for form input data
+app.use(express.json());
+
+app.use("/users", require("./routes"));
 
 app.use((err, req, res, next) => {
   res.sendStatus(err.status);

@@ -21,14 +21,8 @@ module.exports = {
   },
 
   add: function (name, task) {
-    // saves a task for a given person
-    if(tasks[name]) {
-      tasks[name].push(task);
-      if(!task.complete)task.complete = false;
-    } else {
-      tasks[name] = [task];
-      if(!task.complete)task.complete = false;
-    }
+    tasks[name] ? tasks[name].push(task) : tasks[name] = [task];
+    if(!task.complete)task.complete = false;
   },
 
   list: function (name) {
